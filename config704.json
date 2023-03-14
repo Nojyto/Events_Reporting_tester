@@ -1,0 +1,1538 @@
+{
+    "settings": {
+        "sender": {
+            "model": "RUTX11",
+            "host": "http://192.168.1.1",
+            "user": "admin",
+            "pasw": "Admin123",
+            "telnum": "+37063897689"
+        },
+        "recver": {
+            "model": "RUT955",
+            "host": "http://192.168.2.1",
+            "user": "admin",
+            "pasw": "Admin123",
+            "telnum": "+37065259965"
+        }
+    },
+    "commands": {
+        "dataTemplate": {
+            "data": {
+                "id": "",
+                ".type": "rule",
+                "enable": "1",
+                "event": "",
+                "eventMark": "",
+                "action": "sendSMS",
+                "message": "Router name - %rn; Event type - %et; Event text - %ex; Time stamp - %ts",
+                "recipEmail": "",
+                "emailgroup": "",
+                "subject": "",
+                "recipient_format": "single",
+                "telnum": ""
+            }
+        },
+        "events": {
+            "Config": {
+                "all": {
+                    "path": "/api/services/auto_reboot/ping/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {}
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "cfg02c21d"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ping_reboot configuration has been changed"
+                    }
+                },
+                "dropbear": {
+                    "path": "/api/system/access_control/ssh/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "port": "22",
+                                    "id": "general",
+                                    "enable": "0",
+                                    ".type": "dropbear",
+                                    "enable_key_ssh": "0",
+                                    "_sshWanAccess": "0"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "port": "22",
+                                    "id": "general",
+                                    "enable": "1",
+                                    ".type": "dropbear",
+                                    "enable_key_ssh": "0",
+                                    "_sshWanAccess": "0"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "dropbear configuration has been changed"
+                    }
+                },
+                "firewall": {
+                    "path": "/api/network/firewall/general_settings/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "drop_invalid": "1",
+                                    ".type": "defaults",
+                                    "auto_helper": "1",
+                                    "input": "REJECT",
+                                    "forward": "REJECT",
+                                    "id": "general",
+                                    "output": "ACCEPT"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "drop_invalid": "0",
+                                    ".type": "defaults",
+                                    "auto_helper": "1",
+                                    "input": "REJECT",
+                                    "forward": "REJECT",
+                                    "id": "1",
+                                    "output": "ACCEPT"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "firewall configuration has been changed"
+                    }
+                },
+                "snmpd": {
+                    "path": "/api/services/snmp/settings/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "1",
+                                    ".type": "agent",
+                                    "v1mode": "1",
+                                    "id": "general",
+                                    "remoteAccess": "0",
+                                    "v2cmode": "1",
+                                    "ipfamily": "ipv4",
+                                    "port": "161",
+                                    "v3mode": "0"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "0",
+                                    ".type": "agent",
+                                    "v1mode": "1",
+                                    "id": "general",
+                                    "remoteAccess": "0",
+                                    "v2cmode": "1",
+                                    "ipfamily": "ipv4",
+                                    "port": "161",
+                                    "v3mode": "0"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "snmpd configuration has been changed"
+                    }
+                },
+                "hostblock": {
+                    "path": "/api/services/webfilter/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "1",
+                                    ".type": "hostblock",
+                                    "id": "general",
+                                    "mode": "whitelist"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "0",
+                                    ".type": "hostblock",
+                                    "id": "general",
+                                    "mode": "whitelist"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "hostblock configuration has been changed"
+                    }
+                },
+                "events_reporting": {
+                    "path": "/api/services/events_reporting/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {}
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "cfg0292bd"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "events_reporting configuration has been changed"
+                    }
+                },
+                "openvpn": {
+                    "path": "/api/services/openvpn/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {
+                                    "id": "teste",
+                                    "type": "server"
+                                }
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "teste"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "openvpn configuration has been changed"
+                    }
+                },
+                "network": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/network/interfaces/config",
+                                        "data": [
+                                            {
+                                                "enabled": "1",
+                                                "id": "lan",
+                                                ".type": "interface",
+                                                "metric": "1"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "interface",
+                                                "id": "wan",
+                                                "metric": "2"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "interface",
+                                                "id": "wan6",
+                                                "metric": "3"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s1a1",
+                                                "enabled": "1",
+                                                "metric": "4"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s2a1",
+                                                "enabled": "1",
+                                                "metric": "5"
+                                            }
+                                        ],
+                                        "awaitNetwork": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/network/interfaces/config",
+                                        "data": [
+                                            {
+                                                "enabled": "1",
+                                                "id": "lan",
+                                                ".type": "interface",
+                                                "metric": "1"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "interface",
+                                                "id": "wan",
+                                                "metric": "2"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "interface",
+                                                "id": "wan6",
+                                                "metric": "3"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s1a1",
+                                                "enabled": "1",
+                                                "metric": "4"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s2a1",
+                                                "enabled": "1",
+                                                "metric": "5"
+                                            }
+                                        ],
+                                        "awaitNetwork": true
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "network configuration has been changed"
+                    }
+                },
+                "wireless": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/network/wireless/devices/config/radio1/interfaces",
+                                        "data": [
+                                            {
+                                                "enabled": "0",
+                                                ".type": "wifi-iface",
+                                                "id": "default_radio1"
+                                            }
+                                        ],
+                                        "awaitNetwork": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/network/wireless/devices/config/radio1/interfaces",
+                                        "data": [
+                                            {
+                                                "enabled": "1",
+                                                ".type": "wifi-iface",
+                                                "id": "default_radio1"
+                                            }
+                                        ],
+                                        "awaitNetwork": true
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "wireless configuration has been changed"
+                    }
+                },
+                "periodic_reboot": {
+                    "path": "/api/services/auto_reboot/periodic/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {}
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "cfg0210a4"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "periodic_reboot configuration has been changed"
+                    }
+                },
+                "ping_reboot": {
+                    "path": "/api/services/auto_reboot/ping/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {}
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "cfg02c21d"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ping_reboot configuration has been changed"
+                    }
+                },
+                "profile": {
+                    "path": "/api/system/profiles/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {
+                                    "id": "teste",
+                                    "from_current_profile": "1",
+                                    ".type": "profile"
+                                }
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "teste"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "profiles configuration has been changed"
+                    }
+                },
+                "ipsec": {
+                    "path": "/api/services/ipsec/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {
+                                    "id": "teste"
+                                }
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "teste"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ipsec configuration has been changed"
+                    }
+                },
+                "mwan": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/network/interfaces/config",
+                                        "data": [
+                                            {
+                                                "enabled": "1",
+                                                "id": "lan",
+                                                ".type": "interface",
+                                                "metric": "1"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "interface",
+                                                "id": "wan",
+                                                "metric": "2"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "interface",
+                                                "id": "wan6",
+                                                "metric": "3"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s1a1",
+                                                "enabled": "1",
+                                                "metric": "4"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s2a1",
+                                                "enabled": "1",
+                                                "metric": "5"
+                                            }
+                                        ],
+                                        "awaitNetwork": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/network/interfaces/config",
+                                        "data": [
+                                            {
+                                                "enabled": "1",
+                                                "id": "lan",
+                                                ".type": "interface",
+                                                "metric": "1"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "interface",
+                                                "id": "wan",
+                                                "metric": "2"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "interface",
+                                                "id": "wan6",
+                                                "metric": "3"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s1a1",
+                                                "enabled": "1",
+                                                "metric": "4"
+                                            },
+                                            {
+                                                ".type": "interface",
+                                                "id": "mob1s2a1",
+                                                "enabled": "1",
+                                                "metric": "5"
+                                            }
+                                        ],
+                                        "awaitNetwork": true
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "mwan3 configuration has been changed"
+                    }
+                },
+                "blesem": {
+                    "path": "/api/services/bluetooth/general/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "1",
+                                    ".type": "section",
+                                    "id": "general"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "0",
+                                    ".type": "section",
+                                    "id": "general"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "blesem configuration has been changed"
+                    }
+                },
+                "etherwake": {
+                    "path": "/api/services/wol_setup/config/setup",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "id": "setup",
+                                    "broadcast": "1",
+                                    ".type": "etherwake"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "id": "setup",
+                                    "broadcast": "0",
+                                    ".type": "etherwake"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "etherwake configuration has been changed"
+                    }
+                },
+                "mosquitto": {
+                    "path": "/api/services/mqtt_broker/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "0",
+                                    "max_queued_messages": "1000",
+                                    "local_port": [
+                                        "8888"
+                                    ],
+                                    "max_packet_size": "1048576",
+                                    "anonymous_access": "1",
+                                    "persistence": "0",
+                                    "use_tls_ssl": "0",
+                                    "enable_ra": "0",
+                                    "id": "general",
+                                    ".type": "mqtt",
+                                    "acl_file_path": "",
+                                    "password_file": ""
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "1",
+                                    "max_queued_messages": "1000",
+                                    "local_port": [
+                                        "8888"
+                                    ],
+                                    "max_packet_size": "1048576",
+                                    "anonymous_access": "1",
+                                    "persistence": "0",
+                                    "use_tls_ssl": "0",
+                                    "enable_ra": "0",
+                                    "id": "general",
+                                    ".type": "mqtt",
+                                    "acl_file_path": "",
+                                    "password_file": ""
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "mosquitto configuration has been changed"
+                    }
+                },
+                "mqtt_pub": {
+                    "path": "/api/services/mqtt_pub/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "id": "general",
+                                    ".type": "mqtt_pub",
+                                    "enabled": "1",
+                                    "remote_addr": "Teste",
+                                    "remote_port": "1883",
+                                    "username": "",
+                                    "password": "",
+                                    "tls": "0"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "tls": "0",
+                                    ".type": "mqtt_pub",
+                                    "id": "general",
+                                    "enabled": "0",
+                                    "remote_addr": "Teste",
+                                    "remote_port": "1883",
+                                    "username": "",
+                                    "password": ""
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "mqtt_pub configuration has been changed"
+                    }
+                },
+                "ulogd": {
+                    "path": "/api/services/ulog/general/config/global",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "1",
+                                    ".type": "ulogd",
+                                    "network": [
+                                        "lan"
+                                    ],
+                                    "id": "global"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "enabled": "0",
+                                    ".type": "ulogd",
+                                    "network": [
+                                        "lan"
+                                    ],
+                                    "id": "global"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ulogd configuration has been changed"
+                    }
+                },
+                "simcard": {
+                    "path": "/api/network/mobile/simcards/config/cfg01aa0e",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    "band": "auto",
+                                    "volte": "auto",
+                                    "deny_roaming": "1",
+                                    "id": "cfg01aa0e",
+                                    "primary": "1",
+                                    ".type": "sim",
+                                    "enable_sms_limit": "0",
+                                    "service": "auto",
+                                    "operlist": "0",
+                                    "pincode": ""
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    "band": "auto",
+                                    "volte": "auto",
+                                    "deny_roaming": "0",
+                                    "id": "cfg01aa0e",
+                                    "primary": "1",
+                                    ".type": "sim",
+                                    "enable_sms_limit": "0",
+                                    "service": "auto",
+                                    "operlist": "0",
+                                    "pincode": ""
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "simcard configuration has been changed"
+                    }
+                },
+                "ddns": {
+                    "path": "/api/services/ddns/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {
+                                    "id": "Teste"
+                                }
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "Teste"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ddns configuration has been changed"
+                    }
+                },
+                "ntp": {
+                    "path": "/api/services/ntp/client/config/general",
+                    "req": [
+                        {
+                            "put": {
+                                "data": {
+                                    ".type": "ntpclient",
+                                    "zoneName": "UTC",
+                                    "id": "general",
+                                    "gps_sync": "0"
+                                }
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": {
+                                    ".type": "ntpclient",
+                                    "zoneName": "Europe/Vilnius",
+                                    "gps_sync": "0",
+                                    "id": "general"
+                                }
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ntpclient configuration has been changed"
+                    }
+                },
+                "sms": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/services/mobile_utilities/sms_rules/config",
+                                        "data": [
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0192bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0292bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0392bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0492bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0592bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0692bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0792bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0892bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0992bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0a92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0b92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0c92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0d92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0e92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg0f92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1092bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1192bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1292bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1392bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1492bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1592bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1692bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1792bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1892bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1992bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1a92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1b92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1c92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1d92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1e92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg1f92bd"
+                                            },
+                                            {
+                                                "enabled": "0",
+                                                ".type": "rule",
+                                                "id": "cfg2092bd"
+                                            }
+                                        ],
+                                        "awaitNetwork": false
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/services/mobile_utilities/sms_rules/config",
+                                        "data": [
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0192bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0292bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0392bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0492bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0592bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0692bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0792bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0892bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0992bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0a92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0b92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0c92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0d92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0e92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg0f92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1092bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1192bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1292bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1392bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1492bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1592bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1692bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1792bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1892bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1992bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1a92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1b92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1c92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1d92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1e92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg1f92bd"
+                                            },
+                                            {
+                                                "enabled": "1",
+                                                ".type": "rule",
+                                                "id": "cfg2092bd"
+                                            }
+                                        ],
+                                        "awaitNetwork": false
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "sms_utils configuration has been changed"
+                    }
+                },
+                "vrrpd": {
+                    "path": "/api/services/vrrp/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {
+                                    "id": "Teste"
+                                }
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "Teste"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "vrrpd configuration has been changed"
+                    }
+                },
+                "ioman": {
+                    "path": "/api/services/io/status/config",
+                    "req": [
+                        {
+                            "put": {
+                                "data": [
+                                    {
+                                        "id": "dout1",
+                                        "value": "1"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "put": {
+                                "data": [
+                                    {
+                                        "id": "dout1",
+                                        "value": "0"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "ioman configuration has been changed"
+                    }
+                },
+                "upnp": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/services/upnp/acls/config",
+                                        "data": [
+                                            {
+                                                "int_ports": "1024-65535",
+                                                ".type": "perm_rule",
+                                                "comment": "Allow high ports",
+                                                "int_addr": "0.0.0.0/0",
+                                                "id": "cfg02ed70",
+                                                "action": "allow",
+                                                "ext_ports": "1024-65535"
+                                            },
+                                            {
+                                                "int_ports": "0-65535",
+                                                ".type": "perm_rule",
+                                                "comment": "Default deny",
+                                                "int_addr": "0.0.0.0/0",
+                                                "id": "cfg03ed70",
+                                                "action": "deny",
+                                                "ext_ports": "0-65535"
+                                            }
+                                        ],
+                                        "awaitNetwork": false
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "endpoint": "/api/services/upnp/acls/config",
+                                        "data": [
+                                            {
+                                                "int_ports": "1024-65535",
+                                                ".type": "perm_rule",
+                                                "comment": "Allow high ports",
+                                                "int_addr": "0.0.0.0/0",
+                                                "id": "cfg02ed70",
+                                                "action": "allow",
+                                                "ext_ports": "1024-65535"
+                                            },
+                                            {
+                                                "int_ports": "0-65535",
+                                                ".type": "perm_rule",
+                                                "comment": "Default deny",
+                                                "int_addr": "0.0.0.0/0",
+                                                "id": "cfg03ed70",
+                                                "action": "deny",
+                                                "ext_ports": "0-65535"
+                                            }
+                                        ],
+                                        "awaitNetwork": false
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "upnpd configuration has been changed"
+                    }
+                },
+                "dhcp": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "data": {
+                                            ".type": "interface",
+                                            "stp": "0",
+                                            "fwzone": "lan",
+                                            "id": "lan",
+                                            "bridge": "1",
+                                            "ip6assign": "60",
+                                            "ifname": [
+                                                "eth0"
+                                            ],
+                                            "ipaddr": "192.168.1.1",
+                                            "netmask": "255.255.255.0",
+                                            "proto": "static",
+                                            "metric": "1",
+                                            "delegate": "1",
+                                            "force_link": "1",
+                                            "gateway": "",
+                                            "broadcast": "",
+                                            "dns": [
+                                                ""
+                                            ],
+                                            "macaddr": "",
+                                            "mtu": "",
+                                            "ip4table": "",
+                                            "ip6hint": "",
+                                            "ip6ifaceid": ""
+                                        },
+                                        "awaitNetwork": true,
+                                        "endpoint": "/api/network/interfaces/config/lan"
+                                    },
+                                    {
+                                        "method": "PUT",
+                                        "data": {
+                                            ".type": "dhcp",
+                                            "id": "lan",
+                                            "ignore": "enable",
+                                            "end_ip": "192.168.1.249",
+                                            "leasetime": "12h",
+                                            "force": "1",
+                                            "start_ip": "192.168.1.100",
+                                            "dynamicdhcp": "1",
+                                            "netmask": "",
+                                            "dhcp_option": [],
+                                            "force_options": "0",
+                                            "ra": "",
+                                            "dhcpv6": "",
+                                            "ndp": "",
+                                            "dns": [],
+                                            "domain": []
+                                        },
+                                        "awaitNetwork": false,
+                                        "endpoint": "/api/network/dhcp/servers/config/lan"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "data": {
+                                            ".type": "interface",
+                                            "stp": "0",
+                                            "fwzone": "lan",
+                                            "id": "lan",
+                                            "bridge": "1",
+                                            "ip6assign": "60",
+                                            "ifname": [
+                                                "eth0"
+                                            ],
+                                            "ipaddr": "192.168.1.1",
+                                            "netmask": "255.255.255.0",
+                                            "proto": "static",
+                                            "metric": "1",
+                                            "delegate": "1",
+                                            "force_link": "1",
+                                            "gateway": "",
+                                            "broadcast": "",
+                                            "dns": [
+                                                ""
+                                            ],
+                                            "macaddr": "",
+                                            "mtu": "",
+                                            "ip4table": "",
+                                            "ip6hint": "",
+                                            "ip6ifaceid": ""
+                                        },
+                                        "awaitNetwork": true,
+                                        "endpoint": "/api/network/interfaces/config/lan"
+                                    },
+                                    {
+                                        "method": "PUT",
+                                        "data": {
+                                            ".type": "dhcp",
+                                            "id": "lan",
+                                            "ignore": "enable",
+                                            "end_ip": "192.168.1.249",
+                                            "leasetime": "12h",
+                                            "force": "0",
+                                            "start_ip": "192.168.1.100",
+                                            "dynamicdhcp": "1",
+                                            "netmask": "",
+                                            "dhcp_option": [],
+                                            "force_options": "0",
+                                            "ra": "",
+                                            "dhcpv6": "",
+                                            "ndp": "",
+                                            "dns": [],
+                                            "domain": []
+                                        },
+                                        "awaitNetwork": false,
+                                        "endpoint": "/api/network/dhcp/servers/config/lan"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "dhcp configuration has been changed"
+                    }
+                },
+                "sqm": {
+                    "path": "/api/services/sqm/config",
+                    "req": [
+                        {
+                            "post": {
+                                "data": {
+                                    "id": "Teste"
+                                }
+                            }
+                        },
+                        {
+                            "del": {
+                                "data": [
+                                    "Teste"
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "sqm configuration has been changed"
+                    }
+                },
+                "quota_limit": {
+                    "path": "/api/bulk",
+                    "req": [
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "data": {
+                                            "fwzone": "wan",
+                                            "sim": "1",
+                                            "metric": "4",
+                                            "delegate": "1",
+                                            "force_link": "0",
+                                            "proto": "wwan",
+                                            "method": "nat",
+                                            "id": "mob1s1a1",
+                                            ".type": "interface",
+                                            "pdptype": "ip",
+                                            "auto_apn": "1",
+                                            "data_limit": "100000000",
+                                            "enable_warning": "0",
+                                            "reset_hour": "0",
+                                            "mob_limit_enabled": "1",
+                                            "period": "day",
+                                            "dns": [],
+                                            "mtu": "",
+                                            "ip4table": ""
+                                        },
+                                        "awaitNetwork": true,
+                                        "endpoint": "/api/network/interfaces/config/mob1s1a1"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "post": {
+                                "data": [
+                                    {
+                                        "method": "PUT",
+                                        "data": {
+                                            "fwzone": "wan",
+                                            "sim": "1",
+                                            "data_limit": "",
+                                            "enable_warning": "",
+                                            "metric": "4",
+                                            "delegate": "1",
+                                            "force_link": "0",
+                                            "proto": "wwan",
+                                            "method": "nat",
+                                            "id": "mob1s1a1",
+                                            ".type": "interface",
+                                            "reset_hour": "",
+                                            "mob_limit_enabled": "0",
+                                            "period": "",
+                                            "pdptype": "ip",
+                                            "auto_apn": "1",
+                                            "dns": [],
+                                            "mtu": "",
+                                            "ip4table": ""
+                                        },
+                                        "awaitNetwork": true,
+                                        "endpoint": "/api/network/interfaces/config/mob1s1a1"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "rsp": {
+                        "type": "CONFIG",
+                        "text": "quota_limit configuration has been changed"
+                    }
+                }
+            }
+        }
+    }
+}

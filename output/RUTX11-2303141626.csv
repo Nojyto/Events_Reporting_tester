@@ -1,0 +1,5 @@
+Event information
+Expected message, Received message, Expected sender, Actual sender, Status
+Router name - RUTX11  Event type - CONFIG  Event text - ping_reboot configuration has been changed  Time stamp - 2023-03-14 16:25:27, Router name - RUTX11  Event type - CONFIG  Event text - ping_reboot configuration has been changed  Time stamp - 2023-03-14 16:25:30, +37063897689, +37065259965, Passed
+Router name - RUTX11  Event type - CONFIG  Event text - snmpd configuration has been changed  Time stamp - 2023-03-14 16:25:37, Router name - RUTX11  Event type - CONFIG  Event text - events_reporting configuration has been changed  Time stamp - 2023-03-14 16:25:37, +37063897689, +37065259965, Failed
+Router name - RUTX11  Event type - CONFIG  Event text - hostblock configuration has been changed  Time stamp - 2023-03-14 16:25:52, Router name - RUTX11  Event type - CONFIG  Event text - events_reporting configuration has been changed  Time stamp - 2023-03-14 16:25:52, +37063897689, +37065259965, Failed

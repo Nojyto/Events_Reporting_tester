@@ -1,0 +1,46 @@
+{
+    "SSH": {
+        "all":{
+            "req":[
+                {
+                    "ssh": {
+                        "user": "root",
+                        "pasw": "Admin12398987"
+                    }
+                }    
+            ],
+            "rsp": {
+                "type": "CONFIG",
+                "text": "Password auth succeeded for root from"
+            }
+        },
+        "bad":{
+            "req":[
+                {
+                    "ssh": {
+                        "user": "root",
+                        "pasw": "Admin12322"
+                    } 
+                }    
+            ],
+            "rsp": {
+                "type": "CONFIG",
+                "text": "Bad password attempt for root from"
+            }
+        },
+        "succeeded":{
+            "req":[
+                {
+                    "ssh": {
+                        "user": "root",
+                        "pasw": "Admin123"
+                    }
+                }    
+            ],
+            "rsp": {
+                "type": "CONFIG",
+                "text": "ssh configuration has been changed"
+            }
+        }
+    }
+}
